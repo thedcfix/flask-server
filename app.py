@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 import requests
 
@@ -71,6 +71,10 @@ CORS(app)
 @app.route('/')
 def home():
     return config.secret_key
+
+@app.route('/healthcheck')
+def healthcheck():
+    return jsonify(status="healthy"), 200
 
 if __name__ == '__main__':
     app.run(debug=True)
